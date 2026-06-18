@@ -1,0 +1,10 @@
+{
+  "name": "slack-ui-sidebar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static Slack-style UI shell with channel sidebar unread states.",
+  "scripts": {
+    "test": "node tests/sidebar-state.test.js"
+  },
+  "license": "UNLICENSED"
+}
