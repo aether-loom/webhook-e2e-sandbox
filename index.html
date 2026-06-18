@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slack UI – Message Thread and Composer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell" data-app="slack-message-thread">
+      <aside class="workspace-rail" aria-label="Workspaces">
+        <button class="workspace-dot active" aria-label="Acme workspace">A</button>
+        <button class="workspace-dot" aria-label="Design workspace">D</button>
+        <button class="workspace-dot add" aria-label="Add workspace">+</button>
+      </aside>
+
+      <aside class="sidebar" aria-label="Slack navigation">
+        <div class="workspace-header">
+          <div>
+            <strong>Acme Co</strong>
+            <span>Enterprise Grid</span>
+          </div>
+          <button aria-label="New message">✎</button>
+        </div>
+        <nav>
+          <a class="nav-item active" href="#"><span>💬</span> Threads</a>
+          <a class="nav-item" href="#"><span>🔔</span> Mentions & reactions</a>
+          <a class="nav-item" href="#"><span>📄</span> Drafts & sent</a>
+        </nav>
+        <div class="channel-section">
+          <h2>Channels</h2>
+          <a class="channel active" href="#"># product-launch</a>
+          <a class="channel" href="#"># engineering</a>
+          <a class="channel" href="#"># design-crit</a>
+          <a class="channel muted" href="#"># random</a>
+        </div>
+        <div class="channel-section">
+          <h2>Direct messages</h2>
+          <a class="dm" href="#"><span class="presence online"></span> Maya Patel</a>
+          <a class="dm" href="#"><span class="presence away"></span> Jordan Lee</a>
+        </div>
+      </aside>
+
+      <main class="conversation" aria-label="Channel conversation">
+        <header class="channel-header">
+          <div>
+            <h1># product-launch</h1>
+            <p>Final launch coordination • 48 members</p>
+          </div>
+          <div class="header-actions">
+            <button>Canvas</button>
+            <button>Huddle</button>
+            <button aria-label="Channel details">ⓘ</button>
+          </div>
+        </header>
+
+        <section class="message-list" aria-label="Messages">
+          <div class="date-divider"><span>Today</span></div>
+
+          <article class="message" data-message-id="m1">
+            <img class="avatar" src="https://api.dicebear.com/8.x/initials/svg?seed=Maya" alt="Maya avatar" />
+            <div class="message-body">
+              <div class="message-meta"><strong>Maya Patel</strong><time>9:14 AM</time></div>
+              <p>Morning! The launch checklist is almost green. Can everyone drop final blockers in this thread before standup?</p>
+              <div class="reactions" aria-label="Message reactions">
+                <button>✅ <span>6</span></button>
+                <button>🚀 <span>4</span></button>
+                <button class="add-reaction">+</button>
+              </div>
+            </div>
+            <div class="message-affordances" aria-label="Message actions">
+              <button title="Add reaction">😊</button>
+              <button title="Reply in thread">💬</button>
+              <button title="Share message">↗</button>
+              <button title="More actions">⋯</button>
+            </div>
+          </article>
+
+          <article class="message selected" data-message-id="m2">
+            <img class="avatar" src="https://api.dicebear.com/8.x/initials/svg?seed=Jordan" alt="Jordan avatar" />
+            <div class="message-body">
+              <div class="message-meta"><strong>Jordan Lee</strong><time>9:22 AM</time></div>
+              <p>The pricing page QA is done. I attached the latest screen recording and called out two copy nits.</p>
+              <div class="attachment-card">
+                <div class="attachment-icon">▶</div>
+                <div>
+                  <strong>pricing-page-final-pass.mov</strong>
+                  <span>3:42 • 18.4 MB</span>
+                </div>
+              </div>
+              <button class="thread-link" data-open-thread="m2">4 replies • Last reply 2 min ago</button>
+            </div>
+            <div class="message-affordances" aria-label="Message actions">
+              <button title="Add reaction">😊</button>
+              <button title="Reply in thread">💬</button>
+              <button title="Save for later">🔖</button>
+              <button title="More actions">⋯</button>
+            </div>
+          </article>
+
+          <article class="message" data-message-id="m3">
+            <img class="avatar" src="https://api.dicebear.com/8.x/initials/svg?seed=Nia" alt="Nia avatar" />
+            <div class="message-body">
+              <div class="message-meta"><strong>Nia Brooks</strong><time>9:31 AM</time></div>
+              <p>I’m drafting the customer email now. Composer is in draft mode until legal signs off.</p>
+              <div class="reactions"><button>👀 <span>3</span></button></div>
+            </div>
+            <div class="message-affordances" aria-label="Message actions">
+              <button title="Add reaction">😊</button>
+              <button title="Reply in thread">💬</button>
+              <button title="Share message">↗</button>
+              <button title="More actions">⋯</button>
+            </div>
+          </article>
+        </section>
+
+        <section class="composer" aria-label="Message composer" data-state="draft">
+          <div class="composer-state-row">
+            <span class="draft-pill">Draft saved</span>
+            <span class="typing-indicator">Maya is typing…</span>
+          </div>
+          <div class="composer-input" contenteditable="true" role="textbox" aria-label="Message #product-launch" data-placeholder="Message #product-launch">@channel Final launch notes are ready for review.</div>
+          <div class="composer-toolbar" aria-label="Composer toolbar">
+            <div class="formatting-tools">
+              <button aria-label="Bold"><strong>B</strong></button>
+              <button aria-label="Italic"><em>I</em></button>
+              <button aria-label="Strikethrough"><s>S</s></button>
+              <button aria-label="Code">{ }</button>
+              <button aria-label="Bulleted list">• list</button>
+              <button aria-label="Attach file">＋</button>
+            </div>
+            <div class="send-tools">
+              <button class="secondary" id="schedule-send">Schedule</button>
+              <button class="send-button" id="send-message">Send ▾</button>
+            </div>
+          </div>
+          <div class="composer-status" aria-live="polite">Press Enter to send, Shift+Enter for a new line.</div>
+        </section>
+      </main>
+
+      <aside class="thread-panel open" aria-label="Thread panel">
+        <header class="thread-header">
+          <div>
+            <h2>Thread</h2>
+            <span># product-launch</span>
+          </div>
+          <button aria-label="Close thread">×</button>
+        </header>
+        <article class="message compact root-message">
+          <img class="avatar" src="https://api.dicebear.com/8.x/initials/svg?seed=Jordan" alt="Jordan avatar" />
+          <div class="message-body">
+            <div class="message-meta"><strong>Jordan Lee</strong><time>9:22 AM</time></div>
+            <p>The pricing page QA is done. I attached the latest screen recording and called out two copy nits.</p>
+          </div>
+        </article>
+        <div class="reply-divider"><span>4 replies</span></div>
+        <article class="message compact reply">
+          <img class="avatar" src="https://api.dicebear.com/8.x/initials/svg?seed=Ari" alt="Ari avatar" />
+          <div class="message-body">
+            <div class="message-meta"><strong>Ari Chen</strong><time>9:26 AM</time></div>
+            <p>Great catch on the annual-plan wording. I pushed the copy update.</p>
+            <div class="reactions"><button>🙌 <span>2</span></button></div>
+          </div>
+        </article>
+        <article class="message compact reply sending" aria-busy="true">
+          <img class="avatar" src="https://api.dicebear.com/8.x/initials/svg?seed=You" alt="Your avatar" />
+          <div class="message-body">
+            <div class="message-meta"><strong>You</strong><time>Sending…</time></div>
+            <p>Confirming this is reflected in the launch doc too.</p>
+          </div>
+        </article>
+        <section class="thread-composer composer mini" aria-label="Thread reply composer" data-state="empty">
+          <div class="composer-input empty" contenteditable="true" role="textbox" aria-label="Reply in thread" data-placeholder="Reply in thread"></div>
+          <div class="composer-toolbar">
+            <div class="formatting-tools">
+              <button aria-label="Mention teammate">@</button>
+              <button aria-label="Emoji">😊</button>
+              <button aria-label="Attach file">＋</button>
+            </div>
+            <button class="send-button disabled" aria-disabled="true">Send</button>
+          </div>
+        </section>
+      </aside>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
