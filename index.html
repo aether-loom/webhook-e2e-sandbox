@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slack UI - Channel Sidebar</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="slack-shell" aria-label="Slack workspace mockup">
+      <aside class="workspace-rail" aria-label="Workspaces">
+        <button class="workspace-icon active" aria-label="Acme workspace">A</button>
+        <button class="workspace-icon" aria-label="Design workspace">D</button>
+        <button class="workspace-icon add" aria-label="Add workspace">+</button>
+      </aside>
+
+      <aside class="channel-sidebar" aria-label="Channel sidebar">
+        <header class="workspace-header">
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h1>Acme Product</h1>
+          </div>
+          <button class="compose-button" aria-label="Compose new message">✎</button>
+        </header>
+
+        <section class="sidebar-section quick-actions" aria-label="Quick actions">
+          <button class="sidebar-row active-utility">
+            <span class="row-icon">💬</span>
+            <span class="row-label">Threads</span>
+            <span class="badge subtle">3</span>
+          </button>
+          <button class="sidebar-row">
+            <span class="row-icon">🔔</span>
+            <span class="row-label">Mentions & reactions</span>
+            <span class="badge mention">5</span>
+          </button>
+          <button class="sidebar-row">
+            <span class="row-icon">📌</span>
+            <span class="row-label">Later</span>
+          </button>
+        </section>
+
+        <section class="sidebar-section" aria-labelledby="channels-heading">
+          <div class="section-heading">
+            <h2 id="channels-heading">Channels</h2>
+            <button aria-label="Add channel">+</button>
+          </div>
+          <nav id="channel-list" class="channel-list" aria-label="Channels"></nav>
+        </section>
+
+        <section class="sidebar-section" aria-labelledby="dms-heading">
+          <div class="section-heading">
+            <h2 id="dms-heading">Direct messages</h2>
+            <button aria-label="Start direct message">+</button>
+          </div>
+          <nav id="dm-list" class="channel-list" aria-label="Direct messages"></nav>
+        </section>
+      </aside>
+
+      <section class="conversation-panel" aria-live="polite">
+        <header class="conversation-header">
+          <div>
+            <p id="channel-kind" class="eyebrow">Channel</p>
+            <h2 id="active-title"># team-announcements</h2>
+            <p id="active-topic">Company news, launch notes, and executive updates.</p>
+          </div>
+          <div id="active-meta" class="active-meta">1,284 members</div>
+        </header>
+
+        <div id="message-list" class="message-list"></div>
+
+        <form id="message-form" class="message-form">
+          <label class="sr-only" for="message-input">Message active channel</label>
+          <input id="message-input" type="text" placeholder="Message #team-announcements" autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
