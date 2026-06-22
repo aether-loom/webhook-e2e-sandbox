@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slack UI · Message Thread and Composer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="slack-shell" aria-label="Slack workspace mockup">
+      <aside class="workspace-rail" aria-label="Workspaces">
+        <button class="workspace active" aria-label="Launch workspace">L</button>
+        <button class="workspace" aria-label="Design workspace">D</button>
+        <button class="workspace add" aria-label="Add workspace">+</button>
+      </aside>
+
+      <aside class="sidebar" aria-label="Slack navigation">
+        <header class="workspace-header">
+          <div><strong>Launch Co.</strong><span>14 members online</span></div>
+          <button aria-label="Workspace notifications">🔔</button>
+        </header>
+        <label class="search-box"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search Launch Co." /></label>
+        <nav>
+          <p class="nav-title">Channels</p>
+          <a href="#" class="selected"><span>#</span> launch-review <em>8</em></a>
+          <a href="#"><span>#</span> product</a>
+          <a href="#"><span>#</span> design</a>
+          <a href="#"><span>#</span> support-triage</a>
+          <p class="nav-title">Direct messages</p>
+          <a href="#"><span class="presence"></span> Maya Patel</a>
+          <a href="#"><span class="presence"></span> Ari Chen</a>
+          <a href="#"><span class="presence away"></span> Jon Bell</a>
+        </nav>
+      </aside>
+
+      <section class="channel" aria-labelledby="channel-title">
+        <header class="channel-header">
+          <div>
+            <h1 id="channel-title"><span>#</span> launch-review <button aria-label="Star channel">☆</button></h1>
+            <p>Final polish on onboarding, beta invites, and release notes.</p>
+          </div>
+          <div class="header-actions"><button>Invite</button><button aria-label="More channel actions">•••</button></div>
+        </header>
+
+        <section class="thread" aria-label="Message thread" data-testid="message-thread">
+          <div class="date-divider"><span>Today</span></div>
+          <article class="message" data-message-id="1">
+            <div class="avatar">MP</div>
+            <div class="message-body">
+              <header class="message-meta"><strong>Maya Patel</strong><time>9:32 AM</time></header>
+              <p>Morning! I tightened the onboarding copy and added the API-token warning state. Could use a second set of eyes before we ship the beta checklist.</p>
+              <div class="message-actions" aria-label="Message actions"><button>Reply</button><button>React</button><button>Share</button><button aria-label="More actions">•••</button></div>
+              <div class="reaction-row"><button class="active-reaction">🙌 <span>4</span></button><button>👀 <span>2</span></button><button class="add-reaction" aria-label="Add reaction">＋</button><a href="#" class="reply-count">3 replies · View thread</a></div>
+            </div>
+          </article>
+          <article class="message" data-message-id="2">
+            <div class="avatar blue">JB</div>
+            <div class="message-body">
+              <header class="message-meta"><strong>Jon Bell</strong><time>9:36 AM</time></header>
+              <p>Looks good. One small note: the empty composer state should say “Message #launch-review” instead of the generic placeholder.</p>
+              <div class="message-actions" aria-label="Message actions"><button>Reply</button><button>React</button><button>Share</button><button aria-label="More actions">•••</button></div>
+              <div class="reaction-row"><button>✅ <span>1</span></button><button class="add-reaction" aria-label="Add reaction">＋</button></div>
+            </div>
+          </article>
+          <article class="message new" data-message-id="3">
+            <div class="avatar green">AC</div>
+            <div class="message-body">
+              <header class="message-meta"><strong>Ari Chen</strong><time>9:41 AM</time><span class="new-badge">new</span></header>
+              <p>I pushed the thread preview affordance too. Hovering a message reveals quick actions and keeps the thread CTA visible for keyboard users.</p>
+              <div class="message-actions" aria-label="Message actions"><button>Reply</button><button>React</button><button>Share</button><button aria-label="More actions">•••</button></div>
+              <div class="reaction-row"><button class="active-reaction">🚀 <span>3</span></button><button>💬 <span>5</span></button><button class="add-reaction" aria-label="Add reaction">＋</button><a href="#" class="reply-count">5 replies · View thread</a></div>
+            </div>
+          </article>
+        </section>
+
+        <form class="composer empty" aria-label="Message composer" data-testid="message-composer">
+          <div class="composer-toolbar" aria-label="Formatting tools">
+            <button type="button" aria-label="Bold"><b>B</b></button><button type="button" aria-label="Italic"><i>I</i></button><button type="button" aria-label="Strikethrough"><s>S</s></button><button type="button" aria-label="Code">&lt;/&gt;</button><button type="button" aria-label="Bulleted list">• list</button>
+            <span class="toolbar-spacer"></span><button type="button" aria-label="Attach file">📎</button><button type="button" aria-label="Insert link">🔗</button>
+          </div>
+          <textarea id="message-input" rows="3" placeholder="Message #launch-review" aria-describedby="composer-state"></textarea>
+          <footer class="composer-footer">
+            <div class="composer-left"><button type="button">😊 Emoji</button><button type="button">@ Mention</button><button type="button">🎬 Clip</button><button type="button">🎙 Huddle</button></div>
+            <div class="composer-status"><span id="composer-state">No draft</span><button class="send-button" type="submit" disabled aria-label="Send message">➤</button></div>
+          </footer>
+        </form>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
