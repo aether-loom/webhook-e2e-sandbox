@@ -1,2 +1,9 @@
-# webhook-e2e-sandbox
-Loom desktop Daytona e2e sandbox repository.
+# Slack UI message thread
+
+A small vanilla JavaScript Slack-style app shell focused on channel navigation, message threads, composer states, and message affordances.
+
+## Validate
+
+```bash
+npm test
+```
