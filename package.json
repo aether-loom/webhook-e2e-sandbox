@@ -1,0 +1,1 @@
+{"scripts":{"validate":"node --check src/app.js && node --test tests/*.test.js"},"devDependencies":{},"dependencies":{},"private":true,"type":"module"}
