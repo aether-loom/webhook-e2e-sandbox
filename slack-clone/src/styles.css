@@ -11,26 +11,41 @@ button, input { font: inherit; }
 
 .shell {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 300px minmax(0, 1fr);
   min-height: 100vh;
 }
 
 .sidebar {
-  background: #3f0e40;
+  background: linear-gradient(180deg, #4a154b 0%, #350d36 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset -1px 0 rgba(0, 0, 0, 0.22);
   color: #fff;
-  padding: 1rem;
+  padding: 1rem 0.75rem;
 }
 
 .workspace {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  display: grid;
+  gap: 0.25rem;
+  margin: 0 -0.75rem 1.25rem;
+  padding: 0.25rem 1rem 1.1rem;
+}
+
+.workspace-name {
   font-size: 1.2rem;
   font-weight: 800;
-  margin-bottom: 2rem;
+}
+
+.workspace-status {
+  color: #d5c6d6;
+  font-size: 0.85rem;
 }
 
 .sidebar h2 {
   color: #cfc3cf;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
+  margin: 0 0 0.55rem 0.45rem;
   text-transform: uppercase;
 }
 
@@ -39,20 +54,40 @@ button, input { font: inherit; }
   align-items: center;
   background: transparent;
   border: 0;
-  border-radius: 0.4rem;
-  color: #f4eaf4;
-  cursor: default;
+  border-radius: 0.55rem;
+  color: #d8cbd8;
+  cursor: pointer;
   display: flex;
+  gap: 0.6rem;
   justify-content: space-between;
-  margin: 0.15rem 0;
-  padding: 0.45rem 0.6rem;
+  margin: 0.18rem 0;
+  padding: 0.55rem 0.6rem;
   text-align: left;
+  transition: background 150ms ease, color 150ms ease, transform 150ms ease;
   width: 100%;
 }
-.channel.is-active { background: #1164a3; color: #fff; }
+.channel:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.channel:focus-visible { outline: 2px solid #36c5f0; outline-offset: 2px; }
+.channel.is-active { background: #1164a3; color: #fff; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); }
+.channel.has-unread:not(.is-active) { color: #fff; font-weight: 700; }
+.channel-copy { display: grid; gap: 0.16rem; min-width: 0; }
+.channel-row { align-items: center; display: flex; gap: 0.5rem; min-width: 0; }
+.channel-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.channel-time { color: currentColor; flex: none; font-size: 0.72rem; opacity: 0.72; }
+.channel-topic {
+  font-size: 0.76rem;
+  font-weight: 400;
+  opacity: 0.68;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .unread {
   background: #e01e5a;
   border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
+  color: #fff;
+  flex: none;
   min-width: 1.5rem;
   padding: 0.05rem 0.45rem;
   text-align: center;
@@ -66,6 +101,7 @@ button, input { font: inherit; }
 }
 .conversation-header {
   border-bottom: 1px solid #ddd;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
   padding: 1rem 1.5rem;
 }
 .conversation-header h1 { font-size: 1.25rem; margin: 0 0 0.25rem; }
