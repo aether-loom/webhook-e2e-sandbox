@@ -1,0 +1,104 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f2f7;
+  color: #1d1c1d;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+button, input { font: inherit; }
+
+.shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #3f0e40;
+  color: #fff;
+  padding: 1rem;
+}
+
+.workspace {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.sidebar h2 {
+  color: #cfc3cf;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar ul { list-style: none; margin: 0; padding: 0; }
+.channel {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0.4rem;
+  color: #f4eaf4;
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.15rem 0;
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  width: 100%;
+}
+.channel.is-active { background: #1164a3; color: #fff; }
+.unread {
+  background: #e01e5a;
+  border-radius: 999px;
+  min-width: 1.5rem;
+  padding: 0.05rem 0.45rem;
+  text-align: center;
+}
+
+.conversation {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.conversation-header {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 1.5rem;
+}
+.conversation-header h1 { font-size: 1.25rem; margin: 0 0 0.25rem; }
+.conversation-header p { color: #616061; margin: 0; }
+.messages { flex: 1; padding: 1rem 1.5rem; }
+.message { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+.avatar {
+  align-items: center;
+  background: #2eb67d;
+  border-radius: 0.45rem;
+  color: #fff;
+  display: flex;
+  font-weight: 800;
+  height: 2.25rem;
+  justify-content: center;
+  width: 2.25rem;
+}
+.message header { display: flex; gap: 0.5rem; align-items: baseline; }
+time { color: #616061; font-size: 0.8rem; }
+.message p { margin: 0.2rem 0 0; }
+.composer {
+  border-top: 1px solid #ddd;
+  padding: 1rem 1.5rem 1.5rem;
+}
+.composer label { display: block; font-weight: 700; margin-bottom: 0.5rem; }
+.composer input {
+  border: 1px solid #868686;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { min-height: auto; }
+}
