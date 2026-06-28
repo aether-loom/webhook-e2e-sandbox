@@ -1,0 +1,12 @@
+{
+  "name": "slack-clone-static",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tiny static Slack-style UI scaffold with sample channels and messages.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
