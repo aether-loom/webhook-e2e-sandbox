@@ -8,14 +8,41 @@ export function getActiveChannel(state) {
   return state.channels.find((channel) => channel.id === state.activeChannelId) ?? state.channels[0];
 }
 
+export function getChannelLastMessage(state, channelId) {
+  const messages = state.messages[channelId] ?? [];
+  return messages.at(-1) ?? null;
+}
+
+export function setActiveChannel(state, channelId) {
+  const nextChannel = state.channels.find((channel) => channel.id === channelId);
+
+  if (!nextChannel) {
+    return state;
+  }
+
+  state.activeChannelId = nextChannel.id;
+  nextChannel.unreadCount = 0;
+  return state;
+}
+
 export function buildChannelListModel(state) {
-  return state.channels.map((channel) => ({
-    id: channel.id,
-    label: `# ${channel.name}`,
-    topic: channel.topic,
-    unreadCount: channel.unreadCount,
-    isActive: channel.id === getActiveChannel(state).id
-  }));
+  const activeChannel = getActiveChannel(state);
+
+  return state.channels.map((channel) => {
+    const lastMessage = getChannelLastMessage(state, channel.id);
+    const unreadCount = channel.unreadCount ?? 0;
+
+    return {
+      id: channel.id,
+      label: `# ${channel.name}`,
+      topic: channel.topic,
+      unreadCount,
+      hasUnread: unreadCount > 0,
+      lastMessageTime: lastMessage?.time ?? '',
+      isActive: channel.id === activeChannel.id,
+      ariaLabel: `${channel.name} channel${unreadCount > 0 ? `, ${unreadCount} unread` : ''}`
+    };
+  });
 }
 
 export function buildMessageListModel(state) {
@@ -44,9 +71,15 @@ export function renderApp(state = createInitialState()) {
   const channelItems = channels
     .map((channel) => `
       <li>
-        <button class="channel${channel.isActive ? ' is-active' : ''}" data-channel-id="${escapeHtml(channel.id)}" aria-current="${channel.isActive ? 'page' : 'false'}">
-          <span>${escapeHtml(channel.label)}</span>
-          ${channel.unreadCount > 0 ? `<strong class="unread">${channel.unreadCount}</strong>` : ''}
+        <button class="channel${channel.isActive ? ' is-active' : ''}${channel.hasUnread ? ' has-unread' : ''}" data-channel-id="${escapeHtml(channel.id)}" aria-current="${channel.isActive ? 'page' : 'false'}" aria-label="${escapeHtml(channel.ariaLabel)}">
+          <span class="channel-copy">
+            <span class="channel-row">
+              <span class="channel-name">${escapeHtml(channel.label)}</span>
+              ${channel.lastMessageTime ? `<time class="channel-time">${escapeHtml(channel.lastMessageTime)}</time>` : ''}
+            </span>
+            <span class="channel-topic">${escapeHtml(channel.topic)}</span>
+          </span>
+          ${channel.unreadCount > 0 ? `<strong class="unread" aria-label="${channel.unreadCount} unread messages">${channel.unreadCount}</strong>` : ''}
         </button>
       </li>`)
     .join('');
@@ -56,7 +89,7 @@ export function renderApp(state = createInitialState()) {
       <article class="message" data-message-id="${escapeHtml(message.id)}">
         <div class="avatar" aria-hidden="true">${escapeHtml(message.author.slice(0, 1))}</div>
         <div>
-          <header><strong>${escapeHtml(message.author)}</strong><time>${escapeHtml(message.time)}</time></header>
+          <header><strong>${escapeHtml(message.author)}</strong><time datetime="${escapeHtml(message.time)}">${escapeHtml(message.time)}</time></header>
           <p>${escapeHtml(message.text)}</p>
         </div>
       </article>`)
@@ -65,7 +98,10 @@ export function renderApp(state = createInitialState()) {
   return `
     <section class="shell">
       <aside class="sidebar">
-        <div class="workspace">${escapeHtml(state.name)}</div>
+        <div class="workspace">
+          <span class="workspace-name">${escapeHtml(state.name)}</span>
+          <span class="workspace-status">Online • ${escapeHtml(state.currentUser)}</span>
+        </div>
         <nav aria-label="Channels">
           <h2>Channels</h2>
           <ul>${channelItems}</ul>
@@ -87,7 +123,23 @@ export function renderApp(state = createInitialState()) {
 
 export function mountApp(root = document.querySelector('#app'), state = createInitialState()) {
   if (!root) return;
-  root.innerHTML = renderApp(state);
+
+  const render = () => {
+    root.innerHTML = renderApp(state);
+  };
+
+  root.addEventListener('click', (event) => {
+    const channelButton = event.target.closest?.('[data-channel-id]');
+
+    if (!channelButton || !root.contains(channelButton)) {
+      return;
+    }
+
+    setActiveChannel(state, channelButton.dataset.channelId);
+    render();
+  });
+
+  render();
 }
 
 if (typeof document !== 'undefined') {
